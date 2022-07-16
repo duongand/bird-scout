@@ -83,9 +83,29 @@
 }
 
 .tweet-card {
+    display: flex;
+    flex-direction: column;
+
+    margin: 5px;
     height: 300px;
     width: 400px;
     border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: -5px 2px 3px lightgray;
+}
 
-    margin: 5px;
+.tweet-card--header {
+    display: flex;
+}
+
+.tweet-card--content {
+    margin-bottom: auto;
+}
+
+.tweet-card--metrics {
+    display: flex;
+}
+
+.tweet-card--created-date {
+    margin-right: auto;
 }

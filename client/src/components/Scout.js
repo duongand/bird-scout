@@ -1,7 +1,7 @@
 import SearchBar from "./form/SearchBar";
 import TweetCard from "./form/TweetCard";
 
-function Scout({ tweetArray, searchInput, handleChange }) {
+function Scout({ tweetArray, userArray, searchInput, handleChange }) {
     return (
         <div className="scout-wrap">
             <div className="scout">
@@ -12,7 +12,7 @@ function Scout({ tweetArray, searchInput, handleChange }) {
                 />
             </div>
             <div className="tweet-wrap">
-                <TweetCard tweetArray={tweetArray} />
+                {tweetArray ? <TweetCard tweetArray={tweetArray} userArray={userArray}/> : <p>Error</p>}
             </div>
         </div>
     );
