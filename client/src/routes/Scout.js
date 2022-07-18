@@ -1,5 +1,5 @@
-import SearchBar from "./form/SearchBar";
-import TweetCard from "./form/TweetCard";
+import SearchBar from "../components/form/SearchBar";
+import TweetCard from "../components/form/TweetCard";
 
 function Scout({ tweetArray, userArray, searchInput, handleChange }) {
     return (
