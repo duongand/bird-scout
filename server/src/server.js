@@ -5,9 +5,12 @@ const axios = require('axios');
 require('dotenv').config();
 
 app.get('/api/recenttweets', async (req, res) => {
-	const query = req.query.query;
+	const submittedQuery = req.query.query;
 
-	const recentTweets = await axios.get(`https://api.twitter.com/2/tweets/search/recent/?query=${query}`, {
+	const recentTweetsResponse = await axios.get('https://api.twitter.com/2/tweets/search/recent', {
+		params: {
+			'query': submittedQuery
+		},
 		headers: {
 			'Authorization': `Bearer ${process.env.BEARER}`
 		}
@@ -16,15 +19,13 @@ app.get('/api/recenttweets', async (req, res) => {
 		res.sendStatus(500);
 	});
 
-	const tweetsIdsArray = [];
-	for (const tweet of recentTweets.data.data) {
-		tweetsIdsArray.push(tweet.id);
-	};
-	const tweetIds = tweetsIdsArray.join(',');
+	const tweetIdsString = recentTweetsResponse.data.data.map((recentTweet) => {
+		return recentTweet.id
+	}).join(',');
 
 	const tweetInformationResponse = await axios.get('https://api.twitter.com/2/tweets', {
 		params: {
-			'ids': tweetIds,
+			'ids': tweetIdsString,
 			'tweet.fields': 'author_id,created_at,attachments,public_metrics',
 		},
 		headers: {
@@ -32,19 +33,17 @@ app.get('/api/recenttweets', async (req, res) => {
 		}
 	}).catch((error) => {
 		console.log(error);
+		res.sendStatus(500);
 	});
 
-	const tweetInformation = tweetInformationResponse.data.data;
-
-	const tweetAuthorIds = [];
-	for (const tweet of tweetInformation) {
-		tweetAuthorIds.push(tweet.author_id);
-	};
-	const tweetAuthors = tweetAuthorIds.join(',');
+	const tweetInformationData = tweetInformationResponse.data.data;
+	const tweetAuthorIdsString = tweetInformationData.map((tweet) => {
+		return tweet.author_id
+	}).join(',');
 
 	const authorInformationResponse = await axios.get('https://api.twitter.com/2/users', {
 		params: {
-			'ids': tweetAuthors,
+			'ids': tweetAuthorIdsString,
 			'user.fields': 'profile_image_url'
 		},
 		headers: {
@@ -56,19 +55,17 @@ app.get('/api/recenttweets', async (req, res) => {
 	});
 
 	const authorInformation = authorInformationResponse.data.data;
-
 	const finalArray = [];
-	for (let i = 0; i < tweetInformation.length; i++) {
+	for (let i = 0; i < tweetInformationData.length; i++) {
 		finalArray.push({
-			...tweetInformation[i],
+			...tweetInformationData[i],
 			'username': authorInformation[i].username,
 			'name': authorInformation[i].name,
 			'profile_image_url': authorInformation[i].profile_image_url,
 		});
 	};
 
-	console.log(finalArray);
-	res.sendStatus(200);
+	res.send(finalArray);
 });
 
 app.listen(port, () => {
