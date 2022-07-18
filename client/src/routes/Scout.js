@@ -1,7 +1,7 @@
 import SearchBar from "../components/form/SearchBar";
 import TweetCard from "../components/form/TweetCard";
 
-function Scout({ tweetArray, userArray, searchInput, handleChange }) {
+function Scout({ tweetArray, userArray, searchInput, handleChange, onSubmit }) {
     return (
         <div className="scout-wrap">
             <div className="scout">
@@ -9,6 +9,7 @@ function Scout({ tweetArray, userArray, searchInput, handleChange }) {
                 <SearchBar
                     searchInput={searchInput}
                     handleChange={handleChange}
+                    onSubmit={onSubmit}
                 />
             </div>
             <div className="tweet-wrap">

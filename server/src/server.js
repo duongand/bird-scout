@@ -1,12 +1,17 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3001;
 const axios = require('axios');
+const { application } = require('express');
 require('dotenv').config();
+
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	next();
+});
 
 app.get('/api/recenttweets', async (req, res) => {
 	const submittedQuery = req.query.query;
-
 	const recentTweetsResponse = await axios.get('https://api.twitter.com/2/tweets/search/recent', {
 		params: {
 			'query': submittedQuery
