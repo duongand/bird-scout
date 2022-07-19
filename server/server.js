@@ -1,14 +1,11 @@
+const path = require('path');
 const express = require('express');
 const app = express();
 const port = 3001;
 const axios = require('axios');
-const { application } = require('express');
 require('dotenv').config();
 
-app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', '*');
-	next();
-});
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 app.get('/api/recenttweets', async (req, res) => {
 	const submittedQuery = req.query.query;
@@ -71,6 +68,23 @@ app.get('/api/recenttweets', async (req, res) => {
 	};
 
 	res.send(finalArray);
+});
+
+app.get('/api/getFavoriteUsers', async (req, res) => {
+	const favoriteUserInformation = await axios.get('https://api.twitter.com/2/users/by', {
+		params: {
+			'usernames': req.query.usernames,
+			'user.fields': 'profile_image_url'
+		},
+		headers: {
+			'Authorization': `Bearer ${process.env.BEARER}`
+		}
+	}).catch((error) => {
+		console.log(error);
+		res.sendStatus(500);
+	});
+	
+	res.send(favoriteUserInformation.data.data);
 });
 
 app.listen(port, () => {

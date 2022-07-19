@@ -82,11 +82,13 @@
     margin: 100px;
 }
 
+/* Tweet Card */
 .tweet-card {
     display: flex;
     flex-direction: column;
 
     margin: 5px;
+    padding: 5px;
     height: 300px;
     width: 400px;
     border: 1px solid black;
@@ -96,6 +98,22 @@
 
 .tweet-card--header {
     display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.tweet-card--profile-picture {
+    margin-right: 5px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.tweet-card--name {
+    margin-right: 5px;
+}
+
+.tweet-card--username {
+    color: gray;
 }
 
 .tweet-card--content {
@@ -104,8 +122,53 @@
 
 .tweet-card--metrics {
     display: flex;
+    align-items: center;
 }
 
 .tweet-card--created-date {
     margin-right: auto;
+}
+
+.tweet-card--retweet-svg {
+    height: 27px;
+    width: auto;
+    filter: invert(72%) sepia(20%) saturate(5100%) hue-rotate(105deg) brightness(97%) contrast(80%);
+}
+
+.tweet-card--like-svg {
+    height: 27px;
+    width: auto;
+    filter: invert(23%) sepia(93%) saturate(5675%) hue-rotate(336deg) brightness(95%) contrast(91%);
+}
+
+/* Showcase Page */
+.random-scout {
+    margin-top: 5vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.random-scout--favorite-profiles {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tweet-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tweet-profile--profile-picture {
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 10px;
+    width: 200px;
+    height: auto;
+}
+
+.tweet-profile--username {
+    color: lightgray;
 }

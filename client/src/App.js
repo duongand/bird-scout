@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './style.css';
+import favoriteUsers from './data/favoriteUsers';
 import NavigationBar from './components/common/NavigationBar';
 import WelcomePage from './routes/WelcomePage';
 import Scout from './routes/Scout';
 import Error from './routes/Error';
 import RandomScout from './routes/RandomScout';
-import tweetSampleData from './data/tweetSampleData1';
-import userSampleData1 from './data/userSampleData1';
+
 const axios = require('axios');
 
 function App() {
 	const [searchInput, setSearchInput] = useState({
 		query: ''
 	});
-	const [queryString, setQueryString] = useState();
+	const [queryString, setQueryString] = useState('');
+	const [recentTweets, setRecentTweets] = useState([]);
+	const [favoriteUsersInformation, setFavoriteUsersInformation] = useState([]);
+	const [favoriteRecentTweets, setFavoriteRecentTweets] = useState([]);
 
 	function handleChange(event) {
 		const { name, value } = event.target;
@@ -29,12 +32,24 @@ function App() {
 	};
 
 	useEffect(() => {
+		axios.get('http://localhost:3001/api/getFavoriteUsers', {
+			params: {
+				'usernames': favoriteUsers.data.join(',')
+			}
+		}).then((response) => {
+			setFavoriteUsersInformation(response.data);
+		});
+	}, []);
+
+	useEffect(() => {
+		if (queryString === '') return;
+
 		axios.get('http://localhost:3001/api/recenttweets', {
 			params: {
 				'query': queryString
 			}
 		}).then((response) => {
-			console.log(response.data);
+			setRecentTweets(response.data);
 		});
 	}, [queryString]);
 
@@ -49,8 +64,7 @@ function App() {
 				<Route 
 					path="scout" 
 					element={<Scout 
-						tweetArray={tweetSampleData.data}
-						userArray={userSampleData1.data}
+						tweetArray={recentTweets}
 						value={searchInput}
 						handleChange={handleChange}
 						onSubmit={onSubmit}
@@ -58,7 +72,9 @@ function App() {
 				/>
 				<Route 
 					path="randomscout"
-					element={<RandomScout />}
+					element={<RandomScout 
+						favoriteUsers={favoriteUsersInformation}
+					/>}
 				/>
 				<Route 
 					path="*"
