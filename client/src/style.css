@@ -104,6 +104,8 @@
 
 .tweet-card--profile-picture {
     margin-right: 5px;
+    height: 40px;
+    width: auto;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -155,6 +157,12 @@
     justify-content: space-between;
 }
 
+.random-scout--tweets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .tweet-profile {
     display: flex;
     flex-direction: column;
@@ -170,5 +178,5 @@
 }
 
 .tweet-profile--username {
-    color: lightgray;
+    color: gray;
 }

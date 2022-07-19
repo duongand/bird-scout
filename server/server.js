@@ -5,6 +5,7 @@ const port = 3001;
 const axios = require('axios');
 require('dotenv').config();
 
+
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 app.get('/api/recenttweets', async (req, res) => {
@@ -85,6 +86,42 @@ app.get('/api/getFavoriteUsers', async (req, res) => {
 	});
 	
 	res.send(favoriteUserInformation.data.data);
+});
+
+app.get('/api/getFavoriteUserTimeline', async (req, res) => {
+	const favoriteUserTimeline = await axios.get(`https://api.twitter.com/2/users/${req.query.id}/tweets`, {
+	params: {
+		'tweet.fields': 'public_metrics'
+	},
+	headers: {
+		'Authorization': `Bearer ${process.env.BEARER}`
+	}
+	}).catch((error) => {
+		console.log(error);
+		res.sendStatus(500);
+	});
+
+	const authorInformation = await axios.get(`https://api.twitter.com/2/users/${req.query.id}`, {
+		params: {
+			'user.fields': 'profile_image_url'
+		},
+		headers: {
+			'Authorization': `Bearer ${process.env.BEARER}`
+		}
+	}).catch((error) => {
+		console.log(error);
+		res.sendStatus(500);
+	});
+
+	const profile = authorInformation.data.data;
+	const finalArray = favoriteUserTimeline.data.data.map((tweet) => ({
+		...tweet,
+		"profile_image_url": profile.profile_image_url,
+		"username": profile.username,
+		"name": profile.name
+	}));
+
+	res.send(finalArray);
 });
 
 app.listen(port, () => {

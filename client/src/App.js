@@ -17,6 +17,7 @@ function App() {
 	const [queryString, setQueryString] = useState('');
 	const [recentTweets, setRecentTweets] = useState([]);
 	const [favoriteUsersInformation, setFavoriteUsersInformation] = useState([]);
+	const [clickedFavoriteUser, setClickedFavoriteUser] = useState('');
 	const [favoriteRecentTweets, setFavoriteRecentTweets] = useState([]);
 
 	function handleChange(event) {
@@ -29,6 +30,10 @@ function App() {
 
 	function onSubmit() {
 		setQueryString(searchInput.query);
+	};
+
+	function onClick(event) {
+		setClickedFavoriteUser(event);
 	};
 
 	useEffect(() => {
@@ -53,6 +58,18 @@ function App() {
 		});
 	}, [queryString]);
 
+	useEffect(() => {
+		if (clickedFavoriteUser === '') return;
+
+		axios.get('http://localhost:3001/api/getFavoriteUserTimeline', {
+			params: {
+				'id': clickedFavoriteUser
+			}
+		}).then((response) => {
+			setFavoriteRecentTweets(response.data);
+		});
+	}, [clickedFavoriteUser])
+
 	return (
 		<div className="App">
 			<NavigationBar />
@@ -74,6 +91,8 @@ function App() {
 					path="randomscout"
 					element={<RandomScout 
 						favoriteUsers={favoriteUsersInformation}
+						favoriteRecentTweets={favoriteRecentTweets}
+						onClick={onClick}
 					/>}
 				/>
 				<Route 
