@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8171ea34.css",
+    "main.js": "/static/js/main.f5dcccf1.js",
+    "static/media/pete-guan-black-white-bird.png": "/static/media/pete-guan-black-white-bird.c55cc3bc32080db66912.png",
+    "index.html": "/index.html",
+    "main.8171ea34.css.map": "/static/css/main.8171ea34.css.map",
+    "main.f5dcccf1.js.map": "/static/js/main.f5dcccf1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8171ea34.css",
+    "static/js/main.f5dcccf1.js"
+  ]
+}
