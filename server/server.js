@@ -1,3 +1,4 @@
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
@@ -12,7 +13,7 @@ function getRecentTweets(query) {
 		params: {
 			'query': query,
 			'expansions': 'author_id',
-			'tweet.fields': 'author_id,public_metrics,text',
+			'tweet.fields': 'created_at,author_id,public_metrics,text',
 			'user.fields': 'id,name,username,profile_image_url'
 		}
 	}).catch((error) => {
@@ -56,13 +57,22 @@ function mergeTweetData(tweetData, authorData) {
 
 	const mergedTweetData = [];
 	for (let tweet of tweetData) {
+		const convertedCreateDate = convertDate(tweet.created_at);
+
 		mergedTweetData.push({
 			...tweet,
+			"created_at": convertedCreateDate,
 			...authorProfileInfo[tweet.author_id]
 		});
 	};
 
 	return mergedTweetData;
+};
+
+function convertDate(date) {
+	const dateObj = new Date(date);
+	const dateString = `${dateObj.getDate()} ${months[dateObj.getMonth()]}, ${dateObj.getFullYear()}`;
+	return dateString;
 };
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
