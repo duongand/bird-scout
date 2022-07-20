@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Common */
@@ -49,7 +49,7 @@
     top: 25vh;
 
     height: 100px;
-    width: 400px;
+    width: 500px;
     color: white;
     font-size: 18px;
     text-align: center;
@@ -88,9 +88,9 @@
     flex-direction: column;
 
     margin: 5px;
-    padding: 5px;
+    padding: 10px;
     height: 300px;
-    width: 400px;
+    width: 500px;
     border: 1px solid black;
     border-radius: 10px;
     box-shadow: -5px 2px 3px lightgray;
@@ -127,18 +127,22 @@
     align-items: center;
 }
 
+.tweet-card--like-svg {
+    margin-left: 5px;
+}
+
 .tweet-card--created-date {
     margin-right: auto;
 }
 
 .tweet-card--retweet-svg {
-    height: 27px;
+    height: 24px;
     width: auto;
     filter: invert(72%) sepia(20%) saturate(5100%) hue-rotate(105deg) brightness(97%) contrast(80%);
 }
 
 .tweet-card--like-svg {
-    height: 27px;
+    height: 24px;
     width: auto;
     filter: invert(23%) sepia(93%) saturate(5675%) hue-rotate(336deg) brightness(95%) contrast(91%);
 }
@@ -153,6 +157,8 @@
 }
 
 .random-scout--favorite-profiles {
+    margin-bottom: 5vh;
+
     display: flex;
     justify-content: space-between;
 }
@@ -175,6 +181,11 @@
     margin: 10px;
     width: 200px;
     height: auto;
+}
+
+.tweet-profile--profile-picture:hover {
+    cursor: pointer;
+    box-shadow: -5px 5px 3px lightgray;
 }
 
 .tweet-profile--username {

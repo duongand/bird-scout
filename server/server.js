@@ -8,17 +8,26 @@ const port = 3001;
 const axios = require('axios');
 axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.BEARER}`;
 
-function getRecentTweets(query) {
-	return axios.get('https://api.twitter.com/2/tweets/search/recent', {
-		params: {
-			'query': query,
-			'expansions': 'author_id',
-			'tweet.fields': 'created_at,author_id,public_metrics,text',
-			'user.fields': 'id,name,username,profile_image_url'
-		}
-	}).catch((error) => {
-		console.log(error, 'Error retreiving recent tweets.');
-	});
+async function getRecentTweets(query) {
+	try {
+		const searchedUser = await axios.get(`https://api.twitter.com/2/users/by/username/${query}`)
+		.catch((error) => {
+			console.log(error, 'Error in retreiving that user');
+		});
+
+		return getUserRecentTweet(searchedUser.data.data.id);
+	} catch {
+		return axios.get('https://api.twitter.com/2/tweets/search/recent', {
+			params: {
+				'query': query,
+				'expansions': 'author_id',
+				'tweet.fields': 'created_at,author_id,public_metrics,text',
+				'user.fields': 'id,name,username,profile_image_url'
+			}
+		}).catch((error) => {
+			console.log(error, 'Error retreiving recent tweets.');
+		});
+	};		
 };
 
 function getFavoriteUsersInfo(usernames) {
