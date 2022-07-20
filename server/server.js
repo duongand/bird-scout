@@ -40,9 +40,9 @@ function getUserRecentTweet(authorId) {
 			'expansions': 'author_id',
 			'media.fields': 'preview_image_url',
 		}
-		}).catch((error) => {
-			console.log(error, 'Error pulling the user recent timeline');
-		});
+	}).catch((error) => {
+		console.log(error, 'Error pulling the user recent timeline');
+	});
 };
 
 function mergeTweetData(tweetData, authorData) {
