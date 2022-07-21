@@ -6,7 +6,7 @@ import NavigationBar from './components/common/NavigationBar';
 import WelcomePage from './routes/WelcomePage';
 import Scout from './routes/Scout';
 import Error from './routes/Error';
-import RandomScout from './routes/RandomScout';
+import ScoutHighlights from './routes/ScoutHighlights';
 
 const axios = require('axios');
 
@@ -47,15 +47,29 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		if (queryString === '') return;
+		if (queryString === '') {
+			setRecentTweets([]);
+			return;
+		};
 
-		axios.get('http://localhost:3001/api/recenttweets', {
-			params: {
-				'query': queryString
-			}
-		}).then((response) => {
-			setRecentTweets(response.data);
-		});
+		if (queryString.indexOf('@') > -1) {
+			const username = queryString.substring(1, queryString.length);
+			axios.get('http://localhost:3001/api/userRecentTweets', {
+				params: {
+					'username': username
+				}
+			}).then((response) => {
+				setRecentTweets(response.data);
+			});
+		} else {
+			axios.get('http://localhost:3001/api/recentTweets', {
+				params: {
+					'query': queryString
+				}
+			}).then((response) => {
+				setRecentTweets(response.data);
+			});
+		};
 	}, [queryString]);
 
 	useEffect(() => {
@@ -88,8 +102,8 @@ function App() {
 					/>}
 				/>
 				<Route 
-					path="randomscout"
-					element={<RandomScout 
+					path="ScoutHighlights"
+					element={<ScoutHighlights 
 						favoriteUsers={favoriteUsersInformation}
 						favoriteRecentTweets={favoriteRecentTweets}
 						onClick={onClick}

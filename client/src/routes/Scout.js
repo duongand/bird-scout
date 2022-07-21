@@ -1,5 +1,6 @@
 import SearchBar from "../components/form/SearchBar";
 import TweetCard from "../components/form/TweetCard";
+import ErrorMessage from "./ErrorMessage";
 
 function Scout({ tweetArray, searchInput, handleChange, onSubmit }) {
     return (
@@ -14,6 +15,7 @@ function Scout({ tweetArray, searchInput, handleChange, onSubmit }) {
             </div>
             <div className="tweet-wrap">
                 {tweetArray && <TweetCard tweetArray={tweetArray} />}
+                {tweetArray === '' && <ErrorMessage />}
             </div>
         </div>
     );

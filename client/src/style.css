@@ -1,193 +1,229 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background-color: #192734;
 }
 
 /* Common */
 .nav-bar {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
-    border: 1px solid black;
-    padding: 10px;
-    height: 75px;
+  background-color: #15202b;
+  border: 1px solid black;
+  padding: 10px;
+  height: 75px;
+}
+
+.nav-bar--logo {
+  max-height: 100px;
+  margin-right: auto;
 }
 
 .nav-bar--link {
-    margin: 0px 10px;
-    font-size: 20px;
-    color: black;
-    text-decoration: none;
-    transition: all 0.5s ease-in;
-
+  margin: 0px 10px;
+  font-size: 20px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.5s ease-in;
 }
 
 .nav-bar--link:hover {
-    color: rgba(0, 0, 0, 0.5);
-    transition: all 0.5s ease-out;
+  opacity: 50%;
+  transition: all 0.5s ease-out;
 }
-
 
 /* Welcome Page */
 .homepage {
-    position: relative;
+  margin-top: 25vh;
+
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .homepage--banner {
-    position: absolute;
-    left: 0;
-    top: 0;
-    max-width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 100%;
 }
 
 .homepage--information {
-    position: absolute;
-    left: 40%;
-    top: 25vh;
+  /* position: absolute;
+  left: 40%;
+  top: 25vh; */
 
-    height: 100px;
-    width: 500px;
-    color: white;
-    font-size: 18px;
-    text-align: center;
+  height: 100px;
+  width: 500px;
+  color: #ffffff;
+  font-size: 18px;
+  text-align: center;
 }
 
 /* Scout Page */
 .scout {
-    margin-top: 20vh;
+  margin-top: 20vh;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-bar--title {
+  color: #ffffff;
 }
 
 .search-bar--search {
-    height: 45px;
-    width: 500px;
-    text-align: center;
-    font-size: 18px;
+  height: 45px;
+  width: 500px;
+  text-align: center;
+  font-size: 18px;
 
-    border: 1px solid black;
-    border-radius: 20px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.error-message {
+    color: #ffffff;
 }
 
 .tweet-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
-    margin: 100px;
+  margin: 100px;
 }
 
 /* Tweet Card */
 .tweet-card {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    margin: 5px;
-    padding: 10px;
-    height: 300px;
-    width: 500px;
-    border: 1px solid black;
-    border-radius: 10px;
-    box-shadow: -5px 2px 3px lightgray;
+  margin: 5px;
+  padding: 10px;
+  height: 300px;
+  width: 700px;
+  border: 1px solid black;
+  background-color: #22303c;
+  border-radius: 10px;
 }
 
 .tweet-card--header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .tweet-card--profile-picture {
-    margin-right: 5px;
-    height: 40px;
-    width: auto;
-    object-fit: cover;
-    border-radius: 50%;
+  margin-right: 5px;
+  height: 40px;
+  width: auto;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .tweet-card--name {
-    margin-right: 5px;
+  margin-right: 5px;
+  color: #ffffff;
 }
 
 .tweet-card--username {
-    color: gray;
+  color: lightgray;
 }
 
 .tweet-card--content {
-    margin-bottom: auto;
+  color: #ffffff;
+
+  margin-bottom: auto;
 }
 
 .tweet-card--metrics {
-    display: flex;
-    align-items: center;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
 }
 
 .tweet-card--like-svg {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .tweet-card--created-date {
-    margin-right: auto;
+  margin-right: auto;
 }
 
 .tweet-card--retweet-svg {
-    height: 24px;
-    width: auto;
-    filter: invert(72%) sepia(20%) saturate(5100%) hue-rotate(105deg) brightness(97%) contrast(80%);
+  height: 24px;
+  width: auto;
+  filter: invert(72%) sepia(20%) saturate(5100%) hue-rotate(105deg)
+    brightness(97%) contrast(80%);
 }
 
 .tweet-card--like-svg {
-    height: 24px;
-    width: auto;
-    filter: invert(23%) sepia(93%) saturate(5675%) hue-rotate(336deg) brightness(95%) contrast(91%);
+  height: 24px;
+  width: auto;
+  filter: invert(23%) sepia(93%) saturate(5675%) hue-rotate(336deg)
+    brightness(95%) contrast(91%);
 }
 
 /* Showcase Page */
 .random-scout {
-    margin-top: 5vh;
+  margin-top: 5vh;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.random-scout--title {
+  color: #ffffff;
 }
 
 .random-scout--favorite-profiles {
-    margin-bottom: 5vh;
+  margin-bottom: 5vh;
 
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .random-scout--tweets {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .tweet-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tweet-profile--profile-picture {
-    object-fit: cover;
-    border-radius: 50%;
-    margin: 10px;
-    width: 200px;
-    height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 10px;
+  width: 200px;
+  height: auto;
 }
 
 .tweet-profile--profile-picture:hover {
-    cursor: pointer;
-    box-shadow: -5px 5px 3px lightgray;
+  cursor: pointer;
+  box-shadow: -5px 5px 3px lightgray;
+}
+
+.tweet-profile--name {
+  color: #ffffff;
 }
 
 .tweet-profile--username {
-    color: gray;
+  color: lightgray;
 }

@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
+import logo from '../../assets/bird-scout-logo.png';
 
 function NavigationBar() {
     return (
         <header className="nav-bar">
-            {/* <a href="/" className="nav-bar--link">Home</a>
-            <a href="/scout" className="nav-bar--link">Scout</a>
-            <a href="/randomscout" className="nav-bar--link">Random Scout</a> */}
-
+            <img className="nav-bar--logo" src={logo} />
             <Link to="/" className="nav-bar--link">Home</Link>
             <Link to="/scout" className="nav-bar--link">Scout</Link>
-            <Link to="/randomscout" className="nav-bar--link">Random Scout</Link>
+            <Link to="/scoutHighlights" className="nav-bar--link">Scout Highlights</Link>
         </header>
     );
 };

@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.47f27629.css",
-    "main.js": "/static/js/main.6365911c.js",
-    "static/media/pete-guan-black-white-bird.png": "/static/media/pete-guan-black-white-bird.c55cc3bc32080db66912.png",
+    "main.css": "/static/css/main.88e66182.css",
+    "main.js": "/static/js/main.34a26707.js",
+    "static/media/bird-scout-logo.png": "/static/media/bird-scout-logo.9d626be573ba85dbfe9b.png",
     "index.html": "/index.html",
-    "main.47f27629.css.map": "/static/css/main.47f27629.css.map",
-    "main.6365911c.js.map": "/static/js/main.6365911c.js.map"
+    "main.88e66182.css.map": "/static/css/main.88e66182.css.map",
+    "main.34a26707.js.map": "/static/js/main.34a26707.js.map"
   },
   "entrypoints": [
-    "static/css/main.47f27629.css",
-    "static/js/main.6365911c.js"
+    "static/css/main.88e66182.css",
+    "static/js/main.34a26707.js"
   ]
 }

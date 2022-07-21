@@ -1,9 +1,6 @@
-import peteGuanPhoto from '../assests/pete-guan-black-white-bird.png';
-
 function WelcomePage() {
     return (
         <div className="homepage">
-            <img className="homepage--banner" src={peteGuanPhoto}/>
             <div className="homepage--information">
                 <h1 className="homepage--title">Bird Scout</h1>
                 <p className="homepage--description">
