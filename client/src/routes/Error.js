@@ -1,6 +1,6 @@
 function Error() {
     return (
-        <h1>Whoops! This is an incorrect page!</h1>
+        <h1 className="error-page--error-message">Whoops! This is an incorrect page!</h1>
     );
 };
 

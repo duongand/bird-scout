@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.c91dad87.css",
-    "main.js": "/static/js/main.0dc098e1.js",
+    "main.css": "/static/css/main.0b53e423.css",
+    "main.js": "/static/js/main.ff337f5f.js",
     "static/media/bird-scout-logo.png": "/static/media/bird-scout-logo.9d626be573ba85dbfe9b.png",
     "index.html": "/index.html",
-    "main.c91dad87.css.map": "/static/css/main.c91dad87.css.map",
-    "main.0dc098e1.js.map": "/static/js/main.0dc098e1.js.map"
+    "main.0b53e423.css.map": "/static/css/main.0b53e423.css.map",
+    "main.ff337f5f.js.map": "/static/js/main.ff337f5f.js.map"
   },
   "entrypoints": [
-    "static/css/main.c91dad87.css",
-    "static/js/main.0dc098e1.js"
+    "static/css/main.0b53e423.css",
+    "static/js/main.ff337f5f.js"
   ]
 }

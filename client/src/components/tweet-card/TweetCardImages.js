@@ -9,9 +9,8 @@ function TweetCardImages({ images }) {
         <div className="tweet-card--images">
             <ul className="tweet-card--image-list">
                 {imageElements}
-                <li></li>
+                <li className="tweet-card--last-child"></li>
             </ul>
-            
         </div>
     );
 };

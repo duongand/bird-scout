@@ -39,13 +39,19 @@ body {
   transition: all 0.5s ease-out;
 }
 
+.error-page--error-message {
+  color: #ffffff;
+  margin-top: 25vh;
+  display: flex;
+  justify-content: center;
+}
+
 /* Welcome Page */
 .homepage {
   margin-top: 25vh;
 
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
 }
 
@@ -57,10 +63,6 @@ body {
 }
 
 .homepage--information {
-  /* position: absolute;
-  left: 40%;
-  top: 25vh; */
-
   height: 100px;
   width: 500px;
   color: #ffffff;
@@ -92,13 +94,15 @@ body {
 }
 
 .error-message {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .tweet-wrap {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
   justify-content: center;
+  align-items: center;
 
   margin: 100px;
 }
@@ -110,8 +114,7 @@ body {
 
   margin: 5px;
   padding: 10px;
-  height: 300px;
-  max-height: 300px;
+  height: 100%;
   width: 700px;
   border: 1px solid black;
   background-color: #22303c;
@@ -121,6 +124,7 @@ body {
 .tweet-card--header {
   display: flex;
   align-items: center;
+  height: 10%;
   margin-bottom: 10px;
 }
 
@@ -143,13 +147,16 @@ body {
 
 .tweet-card--content {
   color: #ffffff;
-  margin-bottom: auto;
+  height: 40%;
+  margin-bottom: 20px;
 }
 
 .tweet-card--image-list {
   display: flex;
   flex-wrap: wrap;
+  height: 50%;
   list-style-type: none;
+  margin-bottom: 10px;
 }
 
 .tweet-card--image-list-item {
@@ -174,6 +181,7 @@ body {
 
   display: flex;
   align-items: center;
+  height: 10%;
 }
 
 .tweet-card--like-svg {
@@ -220,17 +228,19 @@ body {
 
 .random-scout--tweets {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
   justify-content: center;
+  align-items: center;
 }
 
-.tweet-profile {
+.profile {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.tweet-profile--profile-picture {
+.profile--profile-picture {
   object-fit: cover;
   border-radius: 50%;
   margin: 10px;
@@ -238,15 +248,15 @@ body {
   height: auto;
 }
 
-.tweet-profile--profile-picture:hover {
+.profile--profile-picture:hover {
   cursor: pointer;
   box-shadow: -5px 5px 3px lightgray;
 }
 
-.tweet-profile--name {
+.profile--name {
   color: #ffffff;
 }
 
-.tweet-profile--username {
+.profile--username {
   color: lightgray;
 }

@@ -5,8 +5,8 @@ import favoriteUsers from './data/favoriteUsers';
 import NavigationBar from './components/common/NavigationBar';
 import WelcomePage from './routes/WelcomePage';
 import Scout from './routes/Scout';
-import Error from './routes/Error';
 import ScoutHighlights from './routes/ScoutHighlights';
+import Error from './routes/Error';
 
 const axios = require('axios');
 
@@ -33,11 +33,12 @@ function App() {
 	};
 
 	function onClick(event) {
-		setClickedFavoriteUser(event);
+		event.stopPropagation();
+		setClickedFavoriteUser(event.target.getAttribute('username'));
 	};
 
 	useEffect(() => {
-		axios.get('http://localhost:3001/api/getFavoriteUsers', {
+		axios.get('api/getFavoriteUsers', {
 			params: {
 				'usernames': favoriteUsers.data.join(',')
 			}
@@ -54,7 +55,7 @@ function App() {
 
 		if (queryString.indexOf('@') > -1) {
 			const username = queryString.substring(1, queryString.length);
-			axios.get('http://localhost:3001/api/userRecentTweets', {
+			axios.get('api/userRecentTweets', {
 				params: {
 					'username': username
 				}
@@ -62,7 +63,7 @@ function App() {
 				setRecentTweets(response.data);
 			});
 		} else {
-			axios.get('http://localhost:3001/api/recentTweets', {
+			axios.get('api/recentTweets', {
 				params: {
 					'query': queryString
 				}
@@ -75,9 +76,9 @@ function App() {
 	useEffect(() => {
 		if (clickedFavoriteUser === '') return;
 
-		axios.get('http://localhost:3001/api/getFavoriteUserTimeline', {
+		axios.get('/api/userRecentTweets', {
 			params: {
-				'id': clickedFavoriteUser
+				'username': clickedFavoriteUser
 			}
 		}).then((response) => {
 			setFavoriteRecentTweets(response.data);

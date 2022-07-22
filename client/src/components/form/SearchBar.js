@@ -10,7 +10,7 @@ function SearchBar({ searchInput, handleChange, onSubmit }) {
                 name="query"
                 className="search-bar--search" 
                 type="text" 
-                placeholder="Search for a user or tweet..."
+                placeholder="Search for an @user or tweet..."
                 value={searchInput}
                 onChange={handleChange}
             />
