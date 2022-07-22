@@ -1,70 +1,17 @@
-# Getting Started with Create React App
+## bird-scout
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+`bird-scout` is a web application pulling recent tweets from a user or topic from the Twitter API. This project builds upon on the foundation of working with external APIs server-side using credentials to make requests to incorporate the returned data into a React application.
 
-## Available Scripts
+[Live Demo](https://react-bird-scout.herokuapp.com/)
 
-In the project directory, you can run:
+![demo-screenshot](./demo-screenshot.png)
 
-### `npm start`
+### Summary
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Have you ever felt lost in navigating Twitter? Do the threads make you confused in following a conversation? `bird-scout` allows you to skim the surface on the latest talks regarding a topic and even the latest tweets from a particular person. Begin scouting for a specific person using the `@username` format or simply type a topic `(i.e. nba summer league)` to scout on the opinions of other folks.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`bird-scout` is a React, nodejs application that displays recent tweets based on the user inputs. The Twitter API requires credentials to make requests so this required a back-end to securely handle HTTP requests between the client and Twitter's API. This project was very beneficial in working with React's components and hooks, but also working with external APIs. I heavily struggled understanding the communication between the client, server, and external APIs; however, it is vital in using a back-end to maintain the integrity of sensitive information that's being passed back and forth from the client to the API.
 
-### `npm test`
+### Author
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* **Anderson Duong** - Full-Stack Developer
