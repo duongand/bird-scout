@@ -1,5 +1,5 @@
 import SearchBar from "../components/form/SearchBar";
-import TweetCard from "../components/form/TweetCard";
+import TweetCard from "../components/tweet-card/TweetCard";
 import ErrorMessage from "./ErrorMessage";
 
 function Scout({ tweetArray, searchInput, handleChange, onSubmit }) {

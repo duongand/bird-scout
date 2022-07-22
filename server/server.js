@@ -12,9 +12,10 @@ function getRecentTweets(query) {
 	return axios.get('https://api.twitter.com/2/tweets/search/recent', {
 		params: {
 			'query': query,
-			'expansions': 'author_id',
-			'tweet.fields': 'created_at,author_id,public_metrics,text',
-			'user.fields': 'id,name,username,profile_image_url'
+			'tweet.fields': 'created_at,public_metrics,author_id',
+			'user.fields': 'name,username,profile_image_url',
+			'media.fields': 'preview_image_url,type,url,width,height',
+			'expansions': 'author_id,attachments.media_keys'
 		}
 	}).catch((error) => {
 		console.log(error, 'Error retreiving recent tweets');
@@ -50,15 +51,20 @@ function getUserRecentTweetById(authorId) {
 		params: {
 			'tweet.fields': 'created_at,public_metrics,author_id',
 			'user.fields': 'name,username,profile_image_url',
-			'expansions': 'author_id',
-			'media.fields': 'preview_image_url',
+			'media.fields': 'preview_image_url,type,url,width,height',
+			'expansions': 'author_id,attachments.media_keys'
 		}
 	}).catch((error) => {
 		console.log(error, 'Error pulling the user recent timeline');
 	});
 };
 
-function mergeTweetData(tweetData, authorData) {
+function mergeTweetData(tweetData, authorData, mediaData=[]) {
+	const mediaLinks = {};
+	for (const media of mediaData) {
+		mediaLinks[media.media_key] = media.url || media.preview_image_url;
+	};
+
 	const authorProfileInfo = {};
 	for (const author of authorData) {
 		authorProfileInfo[author.id] = {
@@ -71,10 +77,17 @@ function mergeTweetData(tweetData, authorData) {
 	const mergedTweetData = [];
 	for (let tweet of tweetData) {
 		const convertedCreateDate = convertDate(tweet.created_at);
+		const attachments = [];
+		if (tweet.attachments) {
+			for (const mediaKey of tweet.attachments.media_keys) {
+				attachments.push(mediaLinks[mediaKey]);
+			};
+		};
 
 		mergedTweetData.push({
 			...tweet,
 			"created_at": convertedCreateDate,
+			"attachments": attachments,
 			...authorProfileInfo[tweet.author_id]
 		});
 	};
@@ -93,7 +106,7 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 app.get('/api/recentTweets', async (req, res) => {
 	const recentTweets = await getRecentTweets(req.query.query);
 	if (recentTweets.data.meta.result_count > 0) {
-		const mergedTweetData = mergeTweetData(recentTweets.data.data, recentTweets.data.includes.users);
+		const mergedTweetData = mergeTweetData(recentTweets.data.data, recentTweets.data.includes.users, recentTweets.data.includes.media);
 		res.send(mergedTweetData);
 	} else {
 		res.send(undefined);
@@ -103,7 +116,7 @@ app.get('/api/recentTweets', async (req, res) => {
 app.get('/api/userRecentTweets', async (req, res) => {
 	const userRecentTweets = await getUserRecentTweetByUsername(req.query.username);
 	if (userRecentTweets) {
-		const mergedTweetData = mergeTweetData(userRecentTweets.data.data, userRecentTweets.data.includes.users);
+		const mergedTweetData = mergeTweetData(userRecentTweets.data.data, userRecentTweets.data.includes.users, userRecentTweets.data.includes.media);
 		res.send(mergedTweetData);
 	} else {
 		res.send(userRecentTweets);
@@ -117,7 +130,7 @@ app.get('/api/getFavoriteUsers', async (req, res) => {
 
 app.get('/api/getFavoriteUserTimeline', async (req, res) => {
 	const favoriteUserTimeline = await getUserRecentTweetById(req.query.id);
-	const mergedTweetData = mergeTweetData(favoriteUserTimeline.data.data, favoriteUserTimeline.data.includes.users);
+	const mergedTweetData = mergeTweetData(favoriteUserTimeline.data.data, favoriteUserTimeline.data.includes.users, favoriteUserTimeline.data.includes.media);
 	res.send(mergedTweetData);
 });
 

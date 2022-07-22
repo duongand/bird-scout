@@ -1,5 +1,5 @@
 import TweetProfile from '../components/form/TweetProfile';
-import TweetCard from '../components/form/TweetCard';
+import TweetCard from '../components/tweet-card/TweetCard';
 
 function ScoutHighlights({ favoriteUsers, favoriteRecentTweets, onClick }) {
     return (
