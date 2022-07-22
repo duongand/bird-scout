@@ -5,7 +5,8 @@
   "main": "./server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-start": "npm --prefix ../client run watch & nodemon ./server.js"
+    "dev-start": "npm --prefix ../client run watch & nodemon ./server.js",
+    "start": "node server.js"
   },
   "author": "duongand",
   "license": "ISC",

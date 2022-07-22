@@ -3,7 +3,7 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3000;
 
 const axios = require('axios');
 axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.BEARER}`;
@@ -162,5 +162,5 @@ app.get('/api/getFavoriteUsers', async (req, res) => {
 });
 
 app.listen(port, () => {
-	console.log(`Twitter showcase application listening on port ${port}`);
+	console.log(`bird-scout listening on port ${port}`);
 });
