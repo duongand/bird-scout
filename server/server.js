@@ -33,26 +33,26 @@ function getRecentTweets(query) {
 	});
 };
 
-async function getUserRecentTweetByUsername(username) {
+async function getUserRecentTweetByUsername(username, maxResult=10) {
 	const searchedUser = await axios.get(`https://api.twitter.com/2/users/by/username/${username}`)
 		.catch((error) => {
 			console.log(error, 'Error in getting that users timeline');
 		});
-
 	if (!searchedUser) {
 		return searchedUser;
 	} else {
-		return getUserRecentTweetById(searchedUser.data.data.id);
+		return getUserRecentTweetById(searchedUser.data.data.id, maxResult);
 	};
 };
 
-function getUserRecentTweetById(authorId) {
+function getUserRecentTweetById(authorId, maxResult) {
 	return axios.get(`https://api.twitter.com/2/users/${authorId}/tweets`, {
 		params: {
 			'tweet.fields': 'created_at,public_metrics,author_id',
 			'user.fields': 'name,username,profile_image_url',
 			'media.fields': 'preview_image_url,type,url,width,height',
-			'expansions': 'author_id,attachments.media_keys,referenced_tweets.id'
+			'expansions': 'author_id,attachments.media_keys,referenced_tweets.id',
+			'max_results': maxResult.toString()
 		}
 	}).catch((error) => {
 		console.log(error, 'Error pulling the user recent timeline');
@@ -156,9 +156,28 @@ app.get('/api/userRecentTweets', async (req, res) => {
 	};
 });
 
+app.get('/api/favoriteRandomTweet', async (req, res) => {
+	const userRecentTweets = await getUserRecentTweetByUsername(req.query.username, 50);
+	if (userRecentTweets) {
+		const mergedTweetData = mergeTweetData(userRecentTweets.data.data,
+			userRecentTweets.data.includes.users,
+			userRecentTweets.data.includes.media,
+			userRecentTweets.data.includes.tweets);
+		const randomNumber = Math.floor(Math.random() * mergedTweetData.length);
+
+		res.send([mergedTweetData[randomNumber]]);
+	} else {
+		res.send(userRecentTweets);
+	};
+});
+
 app.get('/api/getFavoriteUsers', async (req, res) => {
 	const favoriteUsers = await getFavoriteUsersInfo(req.query.usernames);
 	res.send(favoriteUsers.data.data);
+});
+
+app.get('/*', async (req, res) => {
+	res.sendFile('index.html', {root: path.join(__dirname, '..', 'client', 'build')});
 });
 
 app.listen(port, () => {

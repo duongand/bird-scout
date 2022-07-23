@@ -17,7 +17,6 @@ function App() {
 	const [queryString, setQueryString] = useState('');
 	const [recentTweets, setRecentTweets] = useState([]);
 	const [favoriteUsersInformation, setFavoriteUsersInformation] = useState([]);
-	const [clickedFavoriteUser, setClickedFavoriteUser] = useState('');
 	const [favoriteRecentTweets, setFavoriteRecentTweets] = useState([]);
 
 	function handleChange(event) {
@@ -34,7 +33,15 @@ function App() {
 
 	function onClick(event) {
 		event.stopPropagation();
-		setClickedFavoriteUser(event.target.getAttribute('username'));
+		const username = event.target.getAttribute('username');
+
+		axios.get('/api/favoriteRandomTweet', {
+			params: {
+				'username': username
+			}
+		}).then((response) => {
+			setFavoriteRecentTweets(response.data);
+		});
 	};
 
 	useEffect(() => {
@@ -72,18 +79,6 @@ function App() {
 			});
 		};
 	}, [queryString]);
-
-	useEffect(() => {
-		if (clickedFavoriteUser === '') return;
-
-		axios.get('/api/userRecentTweets', {
-			params: {
-				'username': clickedFavoriteUser
-			}
-		}).then((response) => {
-			setFavoriteRecentTweets(response.data);
-		});
-	}, [clickedFavoriteUser])
 
 	return (
 		<div className="App">
