@@ -15,7 +15,7 @@ function Scout({ tweetArray, searchInput, handleChange, onSubmit }) {
             </div>
             <div className="tweet-wrap">
                 {tweetArray && <TweetCard tweetArray={tweetArray} />}
-                {tweetArray === '' && <ErrorMessage />}
+                {!tweetArray && <ErrorMessage />}
             </div>
         </div>
     );
